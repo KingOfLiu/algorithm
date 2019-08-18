@@ -17,7 +17,7 @@ public class ModularExponentiation {
         // 计算b二进制数组
         String bBinaryStr = Integer.toBinaryString(b);
         char bBinary[] = bBinaryStr.toCharArray();
-        System.out.println(Arrays.toString(bBinary));
+//        System.out.println(Arrays.toString(bBinary));
         for(int i = 0; i < bBinary.length; i++)
         {
             c = 2 * c;
@@ -27,7 +27,7 @@ public class ModularExponentiation {
                 c = c + 1;
                 d = (d * a) % n;
             }
-            System.out.println("d:"+d);
+//            System.out.println("d:"+d);
         }
         return d;
     }
