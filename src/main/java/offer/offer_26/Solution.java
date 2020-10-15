@@ -78,30 +78,31 @@ public class Solution {
         LinkedList<TreeLevel> queue = new LinkedList<TreeLevel>();
 
         ArrayList<Integer> watchArray = new ArrayList<Integer>();
-
         TreeLevel rootLevel = new TreeLevel(root, 0);
         queue.add(rootLevel);
 
         while(!queue.isEmpty()){
             TreeLevel curLevel = queue.pop();
 
-            if(watchArray.get(curLevel.level) != null){
-                watchArray.remove(curLevel.level);
-            }
-            watchArray.add(curLevel.level, curLevel.treeNode.val);
+            int level = curLevel.level;
 
-            int cur = curLevel.level;
-            cur += 1;
+            if(watchArray.size() <= level){
+                watchArray.add(0);
+            }
+            watchArray.set(level, curLevel.treeNode.val);
+
+            level += 1;
 
             TreeNode curNode = curLevel.treeNode;
             if(curNode.left != null){
-                queue.add(new TreeLevel(curNode.left, cur));
+                queue.add(new TreeLevel(curNode.left, level));
             }
 
             if(curNode.right != null){
-                queue.add(new TreeLevel(curNode.right, cur));
+                queue.add(new TreeLevel(curNode.right, level));
             }
         }
+
         System.out.println(watchArray);
     }
 
