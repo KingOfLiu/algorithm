@@ -5,8 +5,6 @@ import common.ListNodeUtil;
 import common.TreeNode;
 import common.TreeUtil;
 
-import java.util.LinkedList;
-
 /**
  * 有序链表转换二叉搜索树
  * 给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。
