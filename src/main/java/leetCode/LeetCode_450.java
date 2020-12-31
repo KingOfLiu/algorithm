@@ -20,23 +20,29 @@ public class LeetCode_450 {
             return null;
         }
 
+        if(root.left == null && root.right == null && root.val == key){
+            return null;
+        }
+
         TreeNode preNode = null;
         TreeNode curNode = root;
         while(curNode != null){
             if(curNode.val == key){
                 if(curNode.left == null && curNode.right == null){
-                    curNode = null;
-                }else if(curNode.left != null){
-                    TreeNode temp = curNode;
-                    if(preNode != null){
-                        preNode = null;
+                    if(preNode != null && preNode.left == curNode){
+                        preNode.left = null;
+                    } else if(preNode != null && preNode.right == curNode){
+                        preNode.right = null;
                     }
                 } else {
                     TreeNode temp = curNode;
-                    TreeNode tempLeft = curNode.left;
-                    TreeNode tempRight = curNode.right;
+                    TreeNode tempLeft = temp.left;
+                    TreeNode tempRight = temp.right;
+
+                    curNode = null;
                     curNode = tempRight;
                     curNode.left = tempLeft;
+                    curNode.right = tempRight.right;
 
                     if(preNode != null && preNode.left == temp){
                         preNode.left = curNode;
@@ -57,9 +63,9 @@ public class LeetCode_450 {
     }
 
     public static void main(String[] args) throws Exception {
-        int k = 3;
-        //String trees = "[5,3,6,2,4,null,7]";
-        String trees = "[2,3]";
+        int k = 5;
+        String trees = "[5,3,6,2,4,null,7]";
+        //String trees = "[7]";
         TreeNode root = TreeUtil.covertToTreeNode(trees);
 
         LeetCode_450 solution = new LeetCode_450();
