@@ -6,13 +6,13 @@ import java.util.*;
  * 序列化与反序列化二叉树
  * */
 public class TreeUtil {
-    public static TreeNode covertToTreeNode(String json) throws Exception {
+    public static TreeNode covertToTreeNode(String json) {
         if(isBlank(json)){
             return null;
         }
 
         if(!json.startsWith("[") && !json.endsWith("]")){
-            throw new Exception("格式不正确");
+            return null;
         }
 
         String[] data = json.substring(1, json.length() - 1).split(",");
