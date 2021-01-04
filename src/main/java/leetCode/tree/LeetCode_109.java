@@ -1,4 +1,4 @@
-package leetCode;
+package leetCode.tree;
 
 import common.ListNode;
 import common.ListNodeUtil;
