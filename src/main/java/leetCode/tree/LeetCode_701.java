@@ -1,4 +1,4 @@
-package leedCode;
+package leetCode.tree;
 
 import common.TreeNode;
 import common.TreeUtil;
@@ -10,7 +10,7 @@ import common.TreeUtil;
  *
  * 注意，可能存在多种有效的插入方式，只要树在插入后仍保持为二叉搜索树即可。 你可以返回 任意有效的结果 。
  * */
-public class LeedCode_701 {
+public class LeetCode_701 {
     public TreeNode insertIntoBst(TreeNode root, int val){
         if(root == null){
             return null;
@@ -41,7 +41,7 @@ public class LeedCode_701 {
         String trees = "[4,2,7,1,3]";
         int val = 5;
 
-        LeedCode_701 solution = new LeedCode_701();
+        LeetCode_701 solution = new LeetCode_701();
         TreeNode ans = solution.insertIntoBst(TreeUtil.covertToTreeNode(trees), val);
         System.out.println(TreeUtil.covertTreeNodeToString(ans));
     }

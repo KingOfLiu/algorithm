@@ -1,4 +1,4 @@
-package leedCode;
+package leetCode.tree;
 
 import java.util.*;
 
@@ -25,7 +25,7 @@ import java.util.*;
  * 输出: "0"
  * 解释: 从原数字移除所有的数字，剩余为空就是0。
  * */
-public class LeedCode_402 {
+public class LeetCode_402 {
     /**
      * 暴力解法
      * */

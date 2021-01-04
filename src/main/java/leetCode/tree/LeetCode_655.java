@@ -1,4 +1,4 @@
-package leedCode;
+package leetCode.tree;
 
 import common.TreeNode;
 import common.TreeUtil;
@@ -19,7 +19,7 @@ import java.util.List;
  * 每个未使用的空间应包含一个空的字符串""。
  * 使用相同的规则输出子树。
  * */
-public class LeedCode_655 {
+public class LeetCode_655 {
     private static class TNode{
         TreeNode node;
         int leftIndex;

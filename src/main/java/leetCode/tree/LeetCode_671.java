@@ -1,4 +1,4 @@
-package leedCode;
+package leetCode.tree;
 
 import common.TreeNode;
 import common.TreeUtil;
@@ -8,7 +8,7 @@ import java.util.*;
 /**
  *  二叉树中第二小的节点
  * */
-public class LeedCode_671 {
+public class LeetCode_671 {
     public int findSecondMinimumValue(TreeNode root){
         if(root == null){
             return -1;
@@ -45,7 +45,7 @@ public class LeedCode_671 {
         String trees = "[5,5,5]";
         //String trees = "[1,2,1,2,2]";
         TreeNode root = TreeUtil.covertToTreeNode(trees);
-        LeedCode_671 solution = new LeedCode_671();
+        LeetCode_671 solution = new LeetCode_671();
         int ans = solution.findSecondMinimumValue(root);
         System.out.println(ans);
     }

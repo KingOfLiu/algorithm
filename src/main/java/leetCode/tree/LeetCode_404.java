@@ -1,4 +1,4 @@
-package leedCode;
+package leetCode.tree;
 
 import common.TreeNode;
 import common.TreeUtil;
@@ -9,7 +9,7 @@ import java.util.Deque;
 /**
  * 计算给定二叉树的所有左叶子之和。
  * */
-public class LeedCode_404 {
+public class LeetCode_404 {
     public int sumOfLeftLeaves(TreeNode root){
         if(root == null){
             return 0;
@@ -40,7 +40,7 @@ public class LeedCode_404 {
         String trees = "[4,-7,-3,null,null,9,-7,-4,null,-2]";
         TreeNode root = TreeUtil.covertToTreeNode(trees);
 
-        LeedCode_404 solution = new LeedCode_404();
+        LeetCode_404 solution = new LeetCode_404();
         int ans = solution.sumOfLeftLeaves(root);
         System.out.println(ans);
     }
