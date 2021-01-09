@@ -1,5 +1,7 @@
 package leetCode.array;
 
+import common.ArrayUtil;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -43,19 +45,6 @@ public class LeetCode_56 {
 
         LeetCode_56 solution = new LeetCode_56();
         int[][] ans = solution.marge(nums);
-        printArray(ans);
-    }
-
-    public static void printArray(int[][] nums){
-        if(nums == null){
-            return;
-        }
-        for(int i = 0; i < nums.length; i++){
-            int[] row = nums[i];
-            for(int j = 0; j < row.length; j++){
-                System.out.print(nums[i][j] + " ");
-            }
-            System.out.println();
-        }
+        ArrayUtil.printArray(ans);
     }
 }
