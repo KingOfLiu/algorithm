@@ -1,5 +1,7 @@
 package leetCode.array;
 
+import common.ArrayUtil;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -35,6 +37,9 @@ public class LeetCode_84 {
             right[i] = (stack.isEmpty() ? -1 : stack.peek());
             stack.push(i);
         }
+
+        ArrayUtil.printArray(left, true);
+        ArrayUtil.printArray(right, true);
 
         int ans = Integer.MIN_VALUE;
         for(int i = 0; i < len; i++){
