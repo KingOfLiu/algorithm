@@ -23,9 +23,8 @@ public class LeetCode_493 {
     public int reversePairs(int[] nums){
         int len = nums.length;
         List<Integer> sorted = new ArrayList<Integer>();
-        sorted.add(nums[len - 1]);
         int ans = 0;
-        for(int i = len - 2; i >= 0; i--){
+        for(int i = len - 1; i >= 0; i--){
             // 第一次二分查找找到的是逆序对的数量
             int index = findIndex(true, sorted, nums[i]);
             ans += index;
@@ -60,7 +59,7 @@ public class LeetCode_493 {
     }
 
     public static void main(String[] args){
-        int[] nums = {1,3,2,3,1};
+        int[] nums = {2,4,3,5,1};
         LeetCode_493 solution = new LeetCode_493();
         int ans = solution.reversePairs(nums);
         System.out.println(ans);
