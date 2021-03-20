@@ -26,11 +26,12 @@ public class LeetCode_1044 {
     int base = 26;
 
     public String longestDupSubstring(String s){
+        // 在1 到 s.length() - 1中进行二分查找
         int left = 1, right = s.length() - 1;
         int lastDupIndex = 0;
         while(left <= right){
             int subStrLen = left + (right - left) / 2;
-            int dupIndex = findStartStringIndex(s, subStrLen);
+            int dupIndex = findDupSubstringIndex(s, subStrLen);
             if(dupIndex == -1){
                 right = subStrLen - 1;
             } else {
@@ -39,33 +40,44 @@ public class LeetCode_1044 {
             }
         }
 
-        int firstIndex = findStartStringIndex(s, lastDupIndex);
-        return firstIndex == -1 ? " " : s.substring(firstIndex, firstIndex + lastDupIndex);
+        // 查询到第一个重复的hash值的索引值
+        int dupFirstIndex = findDupSubstringIndex(s, lastDupIndex);
+        if(dupFirstIndex == -1){
+            return "";
+        }
+
+        return s.substring(dupFirstIndex, dupFirstIndex + lastDupIndex);
     }
 
     /**
-     * 查找重复字符串的起始位置索引
-     * */
-    private int findStartStringIndex(String s, int mid){
+     * 查找子字符串的索引
+     */
+    private int findDupSubstringIndex(String s, int subStrLen){
         long h = 0;
         long aL = 1;
         char[] chars = s.toCharArray();
-        for(int i = 0; i < mid; i++){
+        for(int i = 0; i < subStrLen; i++){
             h = (h * base + (chars[i] - 'a')) % MOD;
             aL = (aL * base) % MOD;
         }
 
-        Set<Long> set = new HashSet<Long>();
-        set.add(h);
+        Set<Long> seen = new HashSet<Long>();
+        seen.add(h);
 
-        for(int i = 1; i < chars.length - mid + 1; i++){
+        // 在长度为strLen - subStrLen的滑动窗口中查找重复的hash值
+        int strLen = chars.length;
+        for(int i = 1; i < strLen - subStrLen + 1; i++){
+            // 去掉滑动窗口最左边的位
             h = (h * base - (chars[i - 1] - 'a') * aL % MOD + MOD) % MOD;
-            h = (h + (chars[i + mid - 1] - 'a')) % MOD;
 
-            if(set.contains(h)){
+            // 计算滑动新的最右边的位
+            h = (h + (chars[i + subStrLen - 1] - 'a')) % MOD;
+
+            // 判断如果set中有相同的hash值，则直接返回索引
+            if(seen.contains(h)){
                 return i;
             }
-            set.add(h);
+            seen.add(h);
         }
 
         return -1;
