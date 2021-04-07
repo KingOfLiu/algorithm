@@ -26,46 +26,75 @@ package leetCode.greedy;
 public class LeetCode_1802 {
     public int maxValue(int n, int index, int maxSum) {
         // 1 到 n中间二分的尝试找到答案
-        int left = 1, right = n;
-        while(left <= right){
-            int maxVal = left + (right - left) / 2;
-            if(hasMaxVal(index, n, maxVal, maxSum)){
-                left = maxVal + 1;
+        int left = 1, right = maxSum + 1, ans = 0;
+        while(left < right){
+            int mid = left + (right - left) / 2;
+            if(hasMaxVal(index, n, mid, maxSum)){
+                ans = mid;
+                left = mid + 1;
             } else {
-                right = maxVal - 1;
+                right = mid;
             }
         }
-
-        return left;
+        return ans;
     }
 
     boolean hasMaxVal(int index, int n, int maxVal, int maxSum){
-        // 0 到 index
-        int presum = 0, preVal = maxVal;
-        for(int i = index; i >= 0; i--){
-            System.out.print(preVal + " ");
-            if(preVal == 1){
-                presum += 1;
+        // 超时算法
+        // 计算0到index的和
+        /*long preSum = preSum(0, index, maxVal);
+        long suffixSum = suffixSum(index + 1, n - 1, maxVal - 1);
+        return preSum + suffixSum <= maxSum;*/
+
+        long sum = n - 1 + maxVal;
+        long left = Math.min(index, maxVal - 1);
+        sum += (1L * ((maxVal - left) + (maxVal - 1)) * left / 2);
+
+        long right = Math.min(n - index - 1, maxVal - 1);
+        sum += (1L * ((maxVal - 1) + (maxVal - right)) * right / 2);
+
+        sum = sum - left - right;
+        return sum <= maxSum;
+    }
+
+    long preSum(int startIndex, int endIndex, long maxVal){
+        long sum = 0;
+        for(int i = endIndex; i >= startIndex; i--){
+            if(maxVal == 1){
+                sum += 1;
             } else {
-                presum += preVal - 1;
-                preVal -= 1;
+                sum += (maxVal--);
+            }
+        }
+        return sum;
+    }
+
+    long suffixSum(int startIndex, int endIndex, long maxVal){
+        long sum = 0;
+        for(int i = startIndex; i <= endIndex; i++){
+            if(maxVal == 1){
+                sum += 1;
+            } else {
+                sum += (maxVal --);
             }
         }
 
-        // index + 1 到 n
-        int suffsum = 0, suffVal = maxVal;
-        for(int i = index + 1; i <= n; i++){
-            System.out.print(suffVal + " ");
-            if(suffVal == 1){
-                suffsum += 1;
-            } else {
-                suffsum += suffVal;
-                suffVal -= 1;
-            }
-        }
-        System.out.println();
+        return sum;
+    }
 
-        System.out.println(maxVal + " # " + presum + " # " + suffsum + " # " + maxSum);
-        return (presum + suffsum) <= maxSum;
+    public static void main(String[] args){
+        long startTime = System.currentTimeMillis();
+
+        int n = 999999999, index = 100000000, maxSum = 999999999;
+        //int n = 9494370, index = 608170, maxSum = 461398012;
+        LeetCode_1802 solution = new LeetCode_1802();
+        int ans = solution.maxValue(n, index, maxSum);
+        System.out.println(ans);
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("时间：" + (endTime - startTime));
+        //long test = preSum(0, 7, 5);
+        //long test = suffixSum(4, 11, 5);
+        //System.out.println(test);
     }
 }
