@@ -39,28 +39,25 @@ import java.util.Arrays;
 public class LeetCode_1647 {
     public int minDeletions(String s) {
         int[] chars = new int[26];
+        int max = 0;
         for(int i = 0; i < s.length(); i++){
-            chars[s.charAt(i) - 'a']++;
+            int index = s.charAt(i) - 'a';
+            chars[index]++;
+            max = Math.max(max, chars[index]);
         }
-        Arrays.sort(chars);
 
-        int ans = 0;
-        for(int i = 0; i < 26; i++){
-            if(chars[i] == 0){
-                continue;
-            }
-
-            if(i < 25 && chars[i] == chars[i + 1]){
-
-            }
-        }
-        return ans;
+        int sum = max * 1 + (max * (max - 1)) / 2;
+        return s.length() - sum;
     }
 
     public static void main(String[] args){
-        String s = "aaabbbcc";
+        String s = "accdcdadddbaadbc";
         LeetCode_1647 solution = new LeetCode_1647();
         int ans = solution.minDeletions(s);
         System.out.println(ans);
+
+        //int n = 3;
+        //int sum =(n * (n - 1)) / 2;
+        //System.out.println(sum);
     }
 }
