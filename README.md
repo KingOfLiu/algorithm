@@ -1,2 +1,24 @@
-# algorithm
-算法4学习
+# 学习计划
+- [ ] 算法
+    - [ ] leedCode 
+        - [x] 二叉树 50道题 实际截止20210104共通过77道题
+        - [x] 数组 50道题 截止20210119 通过52道题
+        - [x] 栈 50道题 截止20210130 通过47道
+        - [x] 双指针 50道题 截止20210221 50道题
+        - [ ] 二分查找
+            - [ ] [300. 最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+            - [ ] [334. 递增的三元子序列](https://leetcode-cn.com/problems/increasing-triplet-subsequence/)
+            - [ ] [354. 俄罗斯套娃信封问题](https://leetcode-cn.com/problems/russian-doll-envelopes/)
+            - [ ] [646. 最长数对链](https://leetcode-cn.com/problems/maximum-length-of-pair-chain)
+            - [ ] [673. 最长递增子序列的个数](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/)
+            - [ ] [712. 两个字符串的最小ASCII删除和](https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/)
+        - [ ] 排序 
+        - [ ] 贪心算法
+        - [ ] 回溯算法
+        - [ ] 位运算
+        - [ ] 链表
+        - [ ] 堆
+        - [ ] 滑动窗口 
+        - [ ] 动态规划
+        - [ ] 字符串
+        - [ ] 并查集 
