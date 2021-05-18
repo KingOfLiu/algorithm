@@ -1,5 +1,8 @@
 package leetCode.tries;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * 1858. Longest Word With All Prefixes
  *
@@ -38,36 +41,31 @@ package leetCode.tries;
  * 1 <= sum(words[i].length) <= 10^5
  * */
 public class LeetCode_1858 {
-    class TrieNode{
-        TrieNode[] child = new TrieNode[256];
-        String word = null;
-        boolean isEnd = false;
+    class TrieNode {
+        TrieNode[] child = new TrieNode[128];
+        boolean hasPrefix = false;
+
+        TrieNode(){ }
+
+        TrieNode(boolean hasPrefix){
+            this.hasPrefix = hasPrefix;
+        }
     }
 
     class Trie{
-        TrieNode root = new TrieNode();
+        TrieNode root = new TrieNode(true);
 
-        public void insert(String word){
+        public TrieNode insert(String word){
             TrieNode node = root;
             for(int i = 0; i < word.length(); i++){
                 char ch = word.charAt(i);
                 int index = ch - ' ';
+                if(!node.hasPrefix){
+                    return null;
+                }
+
                 if(node.child[index] == null){
                     node.child[index] = new TrieNode();
-                }
-                node = node.child[index];
-            }
-            node.isEnd = true;
-            node.word = word;
-        }
-
-        public TrieNode search(String prefix){
-            TrieNode node = root;
-            for(int i = 0; i < prefix.length(); i++){
-                char ch = prefix.charAt(i);
-                int index = ch - ' ';
-                if(node.child[index] == null){
-                    return null;
                 }
                 node = node.child[index];
             }
@@ -77,18 +75,30 @@ public class LeetCode_1858 {
     }
 
     public String longestWord(String[] words) {
+        Arrays.sort(words, new Comparator<String>(){
+            public int compare(String s1, String s2){
+                return s1.length() - s2.length();
+            }
+        });
+
+        String ans = "";
         Trie trie = new Trie();
         for(String word : words){
-            trie.insert(word);
-        }
+            TrieNode node = trie.insert(word);
+            if(node == null){
+                continue;
+            }
 
-        TrieNode node = trie.search("ap");
-        System.out.println(node);
-        return null;
+            node.hasPrefix = true;
+            if(ans.length() < word.length() || (ans.length() == word.length() && ans.compareTo(word) > 0)){
+                ans = word;
+            }
+        }
+        return ans;
     }
 
     public static void main(String[] args){
-        String[] words = {"a", "banana", "app", "appl", "ap", "apply", "apple"};
+        String[] words = {"k","ki","kir","kira", "kiran"};
         LeetCode_1858 solution = new LeetCode_1858();
         String ans = solution.longestWord(words);
         System.out.println(ans);
