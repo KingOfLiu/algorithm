@@ -38,51 +38,54 @@ package leetCode.tries;
  * */
 public class LeetCode_1803 {
     class TrieNode{
+        int count;
         TrieNode[] child = new TrieNode[2];
-        int cnt = 0;
     }
 
     TrieNode root = new TrieNode();
 
     private void insert(int num){
         TrieNode node = root;
-        for(int i = 15; i >= 0; i--){
-            int bit = (num >> i) & 1;
-            if(node.child[bit] == null){
-                node.child[bit] = new TrieNode();
+        int highBit = 15;
+        for(int i = highBit; i >= 0; i--){
+            int index = (num >>> i) & 1;
+            if(node.child[index] == null){
+                node.child[index] = new TrieNode();
             }
-            node = node.child[bit];
-            node.cnt++;
+            node = node.child[index];
+            node.count++;
         }
     }
 
-    private int search(int num, int limit){
+    private int smaller(int num, int low){
         TrieNode node = root;
-        int count = 0;
-        for(int i = 15; i >= 0; i--){
-            if(node == null){
-                return count;
-            }
 
-            int bitNum = (num >> i ) & 1;
-            int bitLimit = (limit >> i) & 1;
-            if(bitLimit == 1){
-                if(node.child[bitNum] != null){
-                    count += node.child[bitNum].cnt;
+        int cnt = 0;
+        int highBit = 15;
+        for(int i = highBit; i >= 0; i--){
+            if(node == null){
+                return cnt;
+            }
+            int indexNum = (num >>> i) & 1;
+            int indexLow = (low >>> i) & 1;
+
+            if(indexLow == 1){
+                if(node.child[indexNum] != null){
+                    cnt += node.child[indexNum].count;
                 }
-                node = node.child[1 - bitNum];
+                node = node.child[1 - indexNum];
             } else {
-                node = node.child[bitNum];
+                node = node.child[indexNum];
             }
         }
 
-        return count;
+        return cnt;
     }
 
     public int countPairs(int[] nums, int low, int high) {
         int ans = 0;
         for(int num : nums){
-            ans += search(num, high + 1) - search(num, low);
+            ans += smaller(num, high + 1) -  smaller(num, low);
             insert(num);
         }
         return ans;
