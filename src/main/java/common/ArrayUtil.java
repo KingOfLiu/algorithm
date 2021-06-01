@@ -21,6 +21,24 @@ public class ArrayUtil {
         printArray(nums, true);
     }
 
+    public static void printArray(boolean[] nums){
+        printArray(nums, true);
+    }
+
+    public static void printArray(boolean[] nums, boolean lienFeed){
+        if(nums == null || nums.length == 0){
+            return;
+        }
+
+        for(boolean b : nums){
+            System.out.print(b + " ");
+        }
+
+        if(lienFeed){
+            System.out.println();
+        }
+    }
+
     public static void printArray(int[][] nums){
         if(nums == null){
             return;
