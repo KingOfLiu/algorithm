@@ -52,10 +52,9 @@ public class LeetCode_1799 {
                 continue;
             }
 
-            // int i = mask; i != 0; i = (i - 1) & mask
+            // 子集的枚举
             for(int i = mask; i != 0; i = (i - 1) & mask){
                 if(oneCnt(mask) - oneCnt(i) == 2){
-                    System.out.println(mask ^ i);
                     int score = (oneCnt(mask) / 2) * dp[mask ^ i];
                     dp[mask] = Math.max(dp[mask], dp[i] + score);
                 }
