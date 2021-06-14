@@ -1,24 +1,103 @@
 # 学习计划
+
+- [ ] 完成情况
+    
+    - [ ] 6月
+        - [ ] 20210606-20210613
+        - [ ] 20210614-20210620
+
+- [ ] 每周任务清单
+    
+    - [ ] 1.每周周赛/双周赛未做出来的题
+    - [ ] 2.字符串3道题 —— 中等
+    - [ ] 3.数学3道题 —— 中等
+    - [ ] 4.dp重点——5道题 中等/困难
+    
 - [ ] 算法
+    
     - [ ] leedCode 
-        - [x] 二叉树 50道题 实际截止20210104共通过77道题
-        - [x] 数组 50道题 截止20210119 通过52道题
-        - [x] 栈 50道题 截止20210130 通过47道
-        - [x] 双指针 50道题 截止20210221 50道题
-        - [ ] 二分查找
+        - [x] 二叉树 50道题 通过77道题
+    
+        - [x] 数组 50道题 通过130道题
+    
+        - [x] 栈 50道题 通过47道
+    
+        - [x] 双指针 50道题 50道题
+    
+        - [x] 二分查找 79题 90道题
             - [ ] [300. 最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
             - [ ] [334. 递增的三元子序列](https://leetcode-cn.com/problems/increasing-triplet-subsequence/)
             - [ ] [354. 俄罗斯套娃信封问题](https://leetcode-cn.com/problems/russian-doll-envelopes/)
             - [ ] [646. 最长数对链](https://leetcode-cn.com/problems/maximum-length-of-pair-chain)
             - [ ] [673. 最长递增子序列的个数](https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/)
             - [ ] [712. 两个字符串的最小ASCII删除和](https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/)
-        - [ ] 排序 
-        - [ ] 贪心算法
-        - [ ] 回溯算法
-        - [ ] 位运算
+            * * *
+            - [ ] [327. 区间和的个数](https://leetcode-cn.com/problems/count-of-range-sum/)
+            - [ ] [493. 翻转对](https://leetcode-cn.com/problems/reverse-pairs/)
+            - [ ] [315. 计算右侧小于当前元素的个数](https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/)
+            * * *
+            - [ ] [1095. 山脉数组中查找目标值](https://leetcode-cn.com/problems/find-in-mountain-array/)
+            - [ ] [1235. 规划兼职工作](https://leetcode-cn.com/problems/maximum-profit-in-job-scheduling/)
+            
+        - [ ] 差分数组
+    
+            - [x] [370. 区间加法](https://leetcode-cn.com/problems/range-addition/)
+            - [ ] [598. 范围求和II](https://leetcode-cn.com/problems/range-addition-ii/)
+            - [ ] [732. 我的日程安排表 III](https://leetcode-cn.com/problems/my-calendar-iii/)
+            - [ ] [995. K 连续位的最小翻转次数](https://leetcode-cn.com/problems/minimum-number-of-k-consecutive-bit-flips/)
+            - [ ] [1094. 拼车](https://leetcode-cn.com/problems/car-pooling/)
+            - [x] [1109. 航班预订统计](https://leetcode-cn.com/problems/corporate-flight-bookings/)
+            - [ ] [1248. 统计「优美子数组」](https://leetcode-cn.com/problems/count-number-of-nice-subarrays/)
+            - [x] [1589. 所有排列中的最大和](https://leetcode-cn.com/problems/maximum-sum-obtained-of-any-permutation/)
+            - [x] [1674. 使数组互补的最少操作次数](https://leetcode-cn.com/problems/minimum-moves-to-make-array-complementary/)
+    
+        - [x] 排序 34道题
+    
+        - [x] 贪心算法 67道题
+    
+        - [x] 回溯算法 15道题
+    
+        - [x] 深度优先搜索 50道题
+    
+        - [x] 宽度优先搜索 22道题
+    
+        - [x] 位运算 截止20210422 19道题
+    
         - [ ] 链表
-        - [ ] 堆
+    
+        - [x] 堆 截止20210422 23道题
+    
         - [ ] 滑动窗口 
-        - [ ] 动态规划
-        - [ ] 字符串
+    
+        - [x] 动态规划 39道题
+    
+            - [ ] 状态压缩DP
+                - [ ] [1434. 每个人戴不同帽子的方案数](https://leetcode-cn.com/problems/number-of-ways-to-wear-different-hats-to-each-other/)
+                - [x] [1879. 两个数组最小的异或值之和](https://leetcode-cn.com/problems/minimum-xor-sum-of-two-arrays/)
+                - [x] [1799. N 次操作后的最大分数和](https://leetcode-cn.com/problems/maximize-score-after-n-operations/)
+                - [ ] [1755. 最接近目标值的子序列和](https://leetcode-cn.com/problems/closest-subsequence-sum/)
+        
+        - [x] 字符串 64道题
+        
         - [ ] 并查集 
+        
+        - [x] 字典树 截止20210519 8道题
+        
+            - [ ] [421. 数组中两个数的最大异或值](https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/)
+        
+        - [ ] 线段树
+        
+        - [ ] 树状数组
+        
+        - [x] 数学 截止20210503 36道题
+        
+        - [ ] 图论
+        
+            - [ ] Dijkstra
+                - [ ] [1631. 最小体力消耗路径]()
+            - [ ] 拓扑排序
+        
+        - [ ] 字符串
+        
+            - [ ] KMP
+            - [ ] R-bain
