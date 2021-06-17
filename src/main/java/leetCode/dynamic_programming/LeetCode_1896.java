@@ -49,23 +49,18 @@ public class LeetCode_1896 {
     Deque<Character> stackOp = new ArrayDeque<Character>();
 
     public int minOperationsToFlip(String expression) {
-        char[] chs = expression.toCharArray();
-        for(char ch : chs){
-            if(ch == '(' || ch == '|' || ch == '&'){
+        for(char ch : expression.toCharArray()){
+            if(ch == '(' || ch == '&' || ch == '|'){
                 stackOp.push(ch);
             } else if(ch == '0'){
                 stackNum.push(new int[]{0, 1});
-                calc();
+                calu();
             } else if(ch == '1'){
                 stackNum.push(new int[]{1, 0});
-                calc();
+                calu();
             } else {
-                if(ch == '('){
-                    continue;
-                }
-
                 stackOp.poll();
-                calc();
+                calu();
             }
         }
 
@@ -73,21 +68,21 @@ public class LeetCode_1896 {
         return Math.max(ans[0], ans[1]);
     }
 
-    void calc(){
-        if(stackNum.size() >= 2 && (stackOp.peek() == '|' || stackOp.peek() == '&')){
+    void calu(){
+        if(stackNum.size() >= 2 && (stackOp.peek() == '&' || stackOp.peek() == '|')){
             int[] one = stackNum.poll();
             int[] two = stackNum.poll();
 
-            int[] andRst = opAnd(one[0], one[1], two[0], two[1]);
-            int[] orRst = opOr(one[0], one[1], two[0], two[1]);
+            int[] opAnd = opAnd(one[0], one[1], two[0], two[1]);
+            int[] opOr = opOr(one[0], one[1], two[0], two[1]);
 
             if(stackOp.peek() == '&'){
-                int newX = Math.min(andRst[0], orRst[0] + 1);
-                int newY = Math.min(andRst[1], orRst[1] + 1);
+                int newX = Math.min(opAnd[0], opOr[0] + 1);
+                int newY = Math.min(opAnd[1], opOr[1] + 1);
                 stackNum.push(new int[]{newX, newY});
-            } else {
-                int newX = Math.min(orRst[0], andRst[0] + 1);
-                int newY = Math.min(orRst[1], andRst[1] + 1);
+            } else if(stackOp.peek() == '|'){
+                int newX = Math.min(opOr[0], opAnd[0] + 1);
+                int newY = Math.min(opOr[1], opAnd[1] + 1);
                 stackNum.push(new int[]{newX, newY});
             }
             stackOp.poll();
@@ -96,19 +91,18 @@ public class LeetCode_1896 {
 
     int[] opAnd(int x1, int y1, int x2, int y2){
         int min1 = Math.min(x1 + x2, x1 + y2);
-        int min2 = Math.min(min1, y1 + y2);
-
+        int min2 = Math.min(min1, y1 + x2);
         return new int[]{Math.min(min1, min2), y1 + y2};
     }
 
     int[] opOr(int x1, int y1, int x2, int y2){
-        int min1 = Math.min(x1 + y2, y1 + x2);
+        int min1 = Math.min(x1 + y2, x2 + y1);
         int min2 = Math.min(min1, y1 + y2);
         return new int[]{x1 + x2, Math.min(min1, min2)};
     }
 
     public static void main(String[] args){
-        String expression = "(0&0)&(0&0&0)";
+        String expression = "(0|(1|0&1))";
         LeetCode_1896 solution = new LeetCode_1896();
         int ans = solution.minOperationsToFlip(expression);
         System.out.println(ans);
