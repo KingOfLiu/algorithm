@@ -9,9 +9,6 @@ public class LeetCode_1883 {
         // 可忽略的误差
         final double EPS = 1e-7;
 
-        // 极大值
-        final double INFTY = 1e20;
-
         int n = dist.length;
         double[][] dp = new double[n + 1][n + 1];
         for(int i = 1; i <= n; i++){
