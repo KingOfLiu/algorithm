@@ -30,41 +30,35 @@ import common.ArrayUtil;
  * */
 public class LeetCode_1914 {
     public int[][] rotateGrid(int[][] grid, int k) {
-        grid = rotating(grid);
+        int m = grid.length, n = grid[0].length;
+        int circle = Math.min(m, n) / 2;
+        for (int c = 0; c < circle; c++) {
+            int si = c, sj = c;
+            int mi = m - 2 * c, ni = n - 2 * c;
+            rotate(grid, si, sj, mi, ni, k);
+        }
         return grid;
     }
 
-    int[][] rotating(int[][] grid){
-        int m = grid.length, n = grid[0].length;
-        int[][] newGrid = new int[m][n];
-
-        int maxLayer = Math.min(m, n) / 2;
-        for(int layer = 0; layer < maxLayer; layer++){
-            int top = 0 + layer, down = m - layer - 1;
-            int left = 0 + layer, right = n - layer - 1;
-
-            // 每一层的上边
-            for(int i = left + 1; i <= right; i++){
-                newGrid[top][i - 1] = grid[top][i];
-            }
-
-            // 每一层的左边
-            for(int i = top; i <= down - 1; i++){
-                newGrid[i + 1][left] = grid[i][left];
-            }
-
-            // 每一层的下边
-            for(int i = left; i <= right - 1; i++){
-                newGrid[down][i + 1] = grid[down][i];
-            }
-
-            // 每一层的右边
-            for(int i = top + 1; i <= down; i++){
-                newGrid[i - 1][right] = grid[i][right];
-            }
+    private void rotate(int[][] grid, int si, int sj, int mi, int ni, int k) {
+        int len = 2 * (mi + ni) - 4;
+        k %= len;
+        for (int time = 0; time < k; time++) {
+            int start = grid[si][sj];
+            // to left
+            for (int j = sj; j + 1 < ni + sj; j++)
+                grid[si][j] = grid[si][j + 1];
+            // to up
+            for (int i = si; i + 1 < mi + si; i++)
+                grid[i][ni + sj - 1] = grid[i + 1][ni + sj - 1];
+            // to right
+            for (int j = ni + sj - 1; j - 1 >= 0 + sj; j--)
+                grid[mi + si - 1][j] = grid[mi + si - 1][j - 1];
+            // to down
+            for (int i = mi + si - 1; i - 1 >= 0 + si; i--)
+                grid[i][sj] = grid[i - 1][sj];
+            grid[si + 1][sj] = start;
         }
-
-        return newGrid;
     }
 
     public static void main(String[] args){
