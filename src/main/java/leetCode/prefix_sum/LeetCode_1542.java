@@ -1,8 +1,6 @@
 package leetCode.prefix_sum;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * 1542. 找出最长的超赞子字符串
@@ -35,48 +33,35 @@ import java.util.TreeSet;
  * */
 public class LeetCode_1542 {
     public int longestAwesome(String s) {
-        Set<Integer> goodAns = new TreeSet<Integer>(){{
-            add(0);
-            for(int mask = 0; mask < 10; mask++){
-                add(1 << mask);
-            }
-        }};
-
         int[] cnt = new int[1 << 10];
-        Arrays.fill(cnt, -1);
-        int n = s.length();
-        int sum = 0;
-        int ans = 0;
+        Arrays.fill(cnt, -2);
+        cnt[0] = -1;
+        int sum = 0, ans = 0, n = s.length();
         for(int i = 0; i < n; i++){
-            int curNum = s.charAt(i) - '0';
-            sum ^= (1 << curNum);
-            if(goodAns.contains(sum)){
-                ans = Math.max(ans, i + 1);
+            int digit = s.charAt(i) - '0';
+            sum ^= (1 << digit);
+
+            if(cnt[sum] != -2){
+                ans = Math.max(ans, i - cnt[sum]);
+            } else {
+                cnt[sum] = i;
             }
 
-            for(int mask = 0; mask < 10; mask++){
-                int curMask = 1 << mask;
-                int prevIndex = cnt[sum ^ curMask];
-
-                /*System.out.println(i + " # " + prevIndex + " # " + (sum ^ mask) + " # " + sum + " # " + curMask);
-                if((goodAns.contains(sum ^ curMask) || goodAns.contains(sum ^ sum ^ curMask)) && prevIndex != -1){
-                    //System.out.println(prevIndex + " # " + i + " --- " + (sum ^ sum ^ curMask));
-                    ans = Math.max(ans, i - prevIndex);
-                }*/
-                if(prevIndex != -1){
-                    ans = Math.max(ans, i - prevIndex);
+            for(int k = 0; k < 10; k++){
+                int mask = (1 << k);
+                if(cnt[sum ^ mask] != -2){
+                    ans = Math.max(ans, i - cnt[sum ^ mask]);
                 }
             }
-
-            cnt[sum] = i;
         }
+
         return ans;
     }
 
     public static void main(String[] args){
         //String s = "51224";
         //String s = "350844";
-        String s = "0928362497011412243";
+        String s = "213123";
         //String s = "213123";
         LeetCode_1542 solution = new LeetCode_1542();
         int ans = solution.longestAwesome(s);
