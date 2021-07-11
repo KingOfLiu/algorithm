@@ -1,6 +1,7 @@
 package leetCode.rolling_hash;
 
 
+import leetCode_contest.weekly_contest_248.Contest_1923;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,7 +80,8 @@ public class LeetCode_1923 {
 
         int minBase = (int)(1e6), maxBase = (int)(1e7);
         //int base0 = getRandom(minBase, maxBase), base1 = getRandom(minBase, maxBase);
-        int base0 = 1333331, base1 = 1333337;
+        //int base0 = 1333331, base1 = 1333337;
+        int base0 = 10, base1 = 10;
 
         long pow0 = 1, pow1 = 1;
         for(int i = 1; i <= midLen; i++){
@@ -169,10 +171,10 @@ public class LeetCode_1923 {
         };*/
         int n = 5;
         int[][] path = {
-                {0,1,0,1,0,1,0,1,0},{0,1,3,0,1,4,0,1,0}
+                {0,1,2,3,4},{2,3,4},{4,0,1,2,3}
         };
 
-        leetCode_contest.LeetCode_1923 solution = new leetCode_contest.LeetCode_1923();
+        LeetCode_1923 solution = new LeetCode_1923();
         int ans = solution.longestCommonSubpath(n, path);
         System.out.println(ans);
         /*long start = System.currentTimeMillis();
