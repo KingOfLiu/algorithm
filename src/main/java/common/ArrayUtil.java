@@ -64,4 +64,12 @@ public class ArrayUtil {
             System.out.println();
         }
     }
+
+    public static String arrayToString(int[] nums){
+        StringBuffer res = new StringBuffer();
+        for(int num : nums){
+            res.append(num).append(" ");
+        }
+        return res.toString();
+    }
 }
