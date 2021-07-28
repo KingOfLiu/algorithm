@@ -1,7 +1,8 @@
 package codeforces.problemset.segment_tree;
 
-import java.io.BufferedInputStream;
+import java.io.*;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /**
  * link: https://codeforces.com/problemset/problem/380/C
@@ -64,31 +65,29 @@ public class Div_1_223_C {
             int leftIndex = leftChild(treeIndex), rightIndex = rightChild(treeIndex);
             if(left > mid){
                  return query(rightIndex, mid + 1, r, left, right);
-            }
-
-            if(right <= mid){
+            } else if(right <= mid){
                 return query(leftIndex, l, mid, left, right);
+            } else {
+                Node leftNode = query(leftIndex, l, mid, left, mid);
+                Node rightNode = query(rightIndex, mid + 1, r, mid + 1, right);
+
+                Node result = new Node();
+                int x = Math.min(leftNode.a, rightNode.b);
+                result.num += x;
+
+                result.a += rightNode.a;
+                result.b += rightNode.b;
+                result.num += rightNode.num;
+
+                result.a += leftNode.a;
+                result.b += leftNode.b;
+                result.num += leftNode.num;
+
+                result.a -= x;
+                result.b -= x;
+
+                return result;
             }
-
-            Node leftNode = query(leftIndex, l, mid, left, mid);
-            Node rightNode = query(rightIndex, mid + 1, r, mid + 1, right);
-
-            Node result = new Node();
-            int x = Math.min(leftNode.a, rightNode.b);
-            result.num += x;
-
-            result.a += rightNode.a;
-            result.b += rightNode.b;
-            result.num += rightNode.num;
-
-            result.a += leftNode.a;
-            result.b += leftNode.b;
-            result.num += leftNode.num;
-
-            result.a -= x;
-            result.b -= x;
-
-            return result;
         }
 
         private int leftChild(int index){
@@ -100,22 +99,44 @@ public class Div_1_223_C {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(new BufferedInputStream(System.in));
+    public static void main(String[] args) throws IOException {
+        Scan sc = new Scan(System.in);
         String words = sc.next();
-        int m = sc.nextInt();
-        int[][] q = new int[m][2];
+        SegmentTree st = new SegmentTree(words);
+
+        int m = Integer.parseInt(sc.next()), n = words.length();
+
+        StringBuilder print=new StringBuilder();
         for(int i = 0; i < m; i++){
-            q[i][0] = sc.nextInt();
-            q[i][1] = sc.nextInt();
+            int left=sc.nextInt();
+            int right=sc.nextInt();
+
+            int ans = st.query(0, 0, n - 1,left - 1, right - 1).num * 2;
+            print.append(ans).append("\n");
+        }
+        System.out.print(print.toString());
+    }
+
+    static class Scan {
+        StringTokenizer st;
+        BufferedReader br;
+
+        public Scan(InputStream s) {
+            br = new BufferedReader(new InputStreamReader(s));
         }
 
-        SegmentTree st = new SegmentTree(words);
-        for(int i = 0; i < m; i++){
-            int left = q[i][0], right = q[i][1];
+        public String next() {
+            while (st == null || !st.hasMoreTokens()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (Exception e) {
+                }
+            }
+            return st.nextToken();
+        }
 
-            int ans = st.query(0, 0, words.length() - 1, left - 1, right - 1).num * 2;
-            System.out.println(ans);
+        public int nextInt() {
+            return Integer.parseInt(next());
         }
     }
 }
