@@ -35,7 +35,8 @@ public class Div_2_Round_67_D {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        FastScan sc = new FastScan("/Users/zhuhuina/IdeaProjects/algorithm/src/main/java/codeforces/problemset/segment_tree/div2_1187_D/input_01.txt");
+        // FastScan sc = new FastScan("/Users/zhuhuina/IdeaProjects/algorithm/src/main/java/codeforces/problemset/segment_tree/div2_1187_D/input_01.txt");
+        FastScan sc = new FastScan("E:\\3.study\\2.git_workspace\\algorithm\\src\\main\\java\\codeforces\\problemset\\segment_tree\\div2_1187_D\\input_01.txt");
         int t = sc.nextInt();
 
         StringBuffer output = new StringBuffer();
@@ -57,16 +58,20 @@ public class Div_2_Round_67_D {
 
         PrintWriter pw = new PrintWriter(System.out);
         pw.print(output);
+        pw.flush();
+        pw.close();
     }
 
     static class SegmentTree {
         static class SegmentNode {
             int minNum;
+            int idx;
             int left, right;
 
             @Override
             public String toString() {
                 StringBuffer nodeOutput = new StringBuffer();
+                nodeOutput.append("index = ").append(idx).append(" ");
                 nodeOutput.append("[left = ").append(left)
                         .append(" - right = ").append(right)
                         .append("] minNum = ").append(minNum).append(" ");
@@ -87,6 +92,7 @@ public class Div_2_Round_67_D {
             if(left == right){
                 nodes[treeIndex] = new SegmentNode();
                 nodes[treeIndex].minNum = num[left];
+                nodes[treeIndex].idx = left;
                 nodes[treeIndex].left = left;
                 nodes[treeIndex].right = right;
                 return;
@@ -106,10 +112,10 @@ public class Div_2_Round_67_D {
             nodes[treeIndex].minNum = Math.min(nodes[treeLeftIndex].minNum, nodes[treeRightIndex].minNum);
         }
 
-        int query(int treeIndex, int left, int right, int l, int r){
+        SegmentNode query(int treeIndex, int left, int right, int l, int r){
             int mid = (left + right) / 2;
             if(left == l && right == r){
-                return nodes[treeIndex].minNum;
+                return nodes[treeIndex];
             }
             // 查询右区间，条件：如果查询区间的左边界大于中间节点，查询右区间
             else if(l > mid){
@@ -119,9 +125,13 @@ public class Div_2_Round_67_D {
             else if(r <= mid){
                 return query(treeIndex * 2 + 1, left, mid, l, r);
             } else {
-                int leftMinNum = query(treeIndex * 2 + 1, left, mid, l, mid);
-                int rightMinNum = query(treeIndex * 2 + 2, mid + 1, right, mid + 1, r);
-                return Math.min(leftMinNum, rightMinNum);
+                SegmentNode leftNode = query(treeIndex * 2 + 1, left, mid, l, mid);
+                SegmentNode rightNode = query(treeIndex * 2 + 2, mid + 1, right, mid + 1, r);
+                if(leftNode.minNum <= rightNode.minNum){
+                    return leftNode;
+                }
+
+                return rightNode;
             }
         }
 
@@ -165,11 +175,8 @@ public class Div_2_Round_67_D {
         for(int i = 0; i < n; i++){
             if(a[i] != b[i]){
                 // 2.1 find i to n - 1 minNum
-                int tMin = segmentTree.query(0, 0, n - 1, i, n - 1);
-                System.out.println("tMin = " + tMin + " left = " + i + " right = " + (n - 1));
-                if(tMin != b[i]){
-                    //return "NO";
-                }
+                SegmentTree.SegmentNode tMin = segmentTree.query(0, 0, n - 1, i, n - 1);
+                System.out.println(tMin);
 
                 // 2.2 update
 
