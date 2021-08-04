@@ -1,6 +1,7 @@
 package codeforces.problemset.segment_tree.div2_1187_D;
 
 import java.io.*;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 /**
@@ -35,10 +36,12 @@ public class Div_2_Round_67_D {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        // FastScan sc = new FastScan("/Users/zhuhuina/IdeaProjects/algorithm/src/main/java/codeforces/problemset/segment_tree/div2_1187_D/input_01.txt");
-        FastScan sc = new FastScan("E:\\3.study\\2.git_workspace\\algorithm\\src\\main\\java\\codeforces\\problemset\\segment_tree\\div2_1187_D\\input_01.txt");
+        FastScan sc = new FastScan(System.in);
+        //FastScan sc = new FastScan("/Users/zhuhuina/IdeaProjects/algorithm/src/main/java/codeforces/problemset/segment_tree/div2_1187_D/input_01.txt");
+        //FastScan sc = new FastScan("E:\\3.study\\2.git_workspace\\algorithm\\src\\main\\java\\codeforces\\problemset\\segment_tree\\div2_1187_D\\input_01.txt");
         int t = sc.nextInt();
 
+        PrintWriter pw = new PrintWriter(System.out);
         StringBuffer output = new StringBuffer();
         while(t-- > 0){
             int n =  sc.nextInt();
@@ -53,11 +56,8 @@ public class Div_2_Round_67_D {
             }
 
             String ans = solve(a, b, n);
-            output.append(ans).append("\n");
+            pw.println(ans);
         }
-
-        PrintWriter pw = new PrintWriter(System.out);
-        pw.print(output);
         pw.flush();
         pw.close();
     }
@@ -169,18 +169,30 @@ public class Div_2_Round_67_D {
     }
 
     static String solve(int[] a, int[] b, int n){
+        LinkedList<Integer>[] q = new LinkedList[a.length + 1];
+        for(int i = 0; i < a.length + 1; i++){
+            q[i] = new LinkedList<Integer>();
+        }
+
+        for(int i = 0; i < a.length; i++){
+            q[a[i]].offer(i);
+        }
+
         // 1.构建线段树
         SegmentTree segmentTree = new SegmentTree(a);
-
         for(int i = 0; i < n; i++){
-            if(a[i] != b[i]){
-                // 2.1 find i to n - 1 minNum
-                SegmentTree.SegmentNode tMin = segmentTree.query(0, 0, n - 1, i, n - 1);
-                System.out.println(tMin);
-
-                // 2.2 update
-
+            if(q[b[i]].isEmpty()){
+                return "NO";
             }
+
+            int xPos = q[b[i]].pollFirst();
+
+            SegmentTree.SegmentNode tMin = segmentTree.query(0, 0, n - 1, 0, xPos);
+            if(tMin.minNum < a[xPos]){
+                return "NO";
+            }
+
+            segmentTree.update(0, 0, n - 1, xPos, Integer.MAX_VALUE);
         }
         return "YES";
     }
