@@ -16,21 +16,20 @@ public class Main {
 
         int t = sc.nextInt();
         while(t-- > 0){
-            int n = sc.nextInt();
-            int k = sc.nextInt();
-
+            int n = sc.nextInt(), k = sc.nextInt();
             int[] a = new int[n + 1];
             for(int i = 1; i <= n; i++){
                 a[i] = sc.nextInt();
             }
 
-            long ans = Integer.MIN_VALUE;
-            int left = Math.max(1, n - 2 * k);
-            for(int i = left; i <= n; i++){
+            long ans = Long.MIN_VALUE;
+            for(int i = Math.max(1, n - 2 * k); i <= n; i++){
                 for(int j = i + 1; j <= n; j++){
-                    ans = Math.max(ans, (i * j - k * (a[i] | a[j])));
+                    long val = (long)i * j - (long) k * (a[i] | a[j]);
+                    ans = Math.max(ans, val);
                 }
             }
+
             out.println(ans);
         }
 
@@ -61,6 +60,10 @@ public class Main {
 
         public int nextInt() {
             return Integer.parseInt(next());
+        }
+
+        public long nextLong(){
+            return Long.parseLong(next());
         }
     }
 }
